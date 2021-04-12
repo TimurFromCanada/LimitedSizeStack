@@ -8,26 +8,39 @@ namespace TodoApplication
 {
     public class LimitedSizeStack<T>
     {
+        readonly int limit;
+
+        LinkedList<T> stack = new LinkedList<T>();
+
         public LimitedSizeStack(int limit)
         {
+            this.limit = limit;
         }
 
         public void Push(T item)
         {
-            throw new NotImplementedException();
+            if (stack.Count >= limit)
+            {
+                stack.RemoveFirst();
+            }
+                
+            stack.AddLast(item);
         }
 
         public T Pop()
         {
-            throw new NotImplementedException();
+            var result = stack.Last.Value;
+            stack.RemoveLast();
+            return result;
         }
 
         public int Count
         {
             get
             {
-                throw new NotImplementedException();
+                return stack.Count;
             }
         }
     }
 }
+
